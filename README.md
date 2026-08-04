@@ -2,9 +2,6 @@
 
 A beginner-friendly, full-stack **MERN** (MongoDB, Express, React, Node.js) administrative dashboard designed for educational institutions.
 
-> [!NOTE]
-> **Welcome Student Developers!** This repository is designed as a learning project. The codebase is clean, simple, and accompanied by a complete documentation system to guide you step-by-step.
-
 ---
 
 ## 📚 Documentation Hub
@@ -89,10 +86,10 @@ graph TD
 
 ---
 
-## 🤝 Guidelines for Beginners
+## 🤝 Guidelines 
 
-1. **Do not be afraid to break things locally** — Git lets you undo changes easily!
-2. **Always read error messages in the terminal and browser console** before guessing.
-3. **Use the documentation in `/docs`** whenever you encounter a new concept or file.
+1. **Kuch bhi kharab ho tension mat lena** — Git lets you undo changes easily!
+2. **Agar kabhi error ai to use terminal or browser console pe dekhna or naa samajh ai to ChatGPT se puuchna** before guessing.
+3. **Documentation dekh lena sahi se`/docs`** whenever you encounter a new concept or file.
 
-Happy Coding! 🚀
+**Or firbhi kuch na ho to puch lena**
