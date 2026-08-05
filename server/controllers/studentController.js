@@ -2,37 +2,119 @@ const Student = require("../models/Student");
 
 // Get All Students
 const getStudents = async (req, res) => {
-  res.json({
-    message: "Get All Students API",
-  });
-};
+  try {
+    const students = await Student.find();
 
-// Get Student By ID
+    res.status(200).json({
+      success: true,
+      count: students.length,
+      data: students,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 const getStudentById = async (req, res) => {
-  res.json({
-    message: "Get Student By ID API",
-  });
+  try {
+    const student = await Student.findById(req.params.id);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: student,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // Create Student
 const createStudent = async (req, res) => {
-  res.json({
-    message: "Create Student API",
-  });
+  try {
+    const student = await Student.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Student created successfully",
+      data: student,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // Update Student
 const updateStudent = async (req, res) => {
-  res.json({
-    message: "Update Student API",
-  });
+  try {
+    const student = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Student updated successfully",
+      data: student,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // Delete Student
 const deleteStudent = async (req, res) => {
-  res.json({
-    message: "Delete Student API",
-  });
+  try {
+    const student = await Student.findByIdAndDelete(req.params.id);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Student deleted successfully",
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 module.exports = {
