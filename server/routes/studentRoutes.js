@@ -1,4 +1,7 @@
-const { protect } = require("../middleware/auth");
+const {
+  protect,
+  authorize,
+} = require("../middleware/auth");
 const express = require("express");
 
 const {
@@ -18,7 +21,12 @@ router.get("/", getStudents);
 router.get("/:id", getStudentById);
 
 // POST create student
-router.post("/", protect, createStudent);
+router.post(
+  "/",
+  protect,
+  authorize("Admin"),
+  createStudent
+);
 
 // PUT update student
 router.put("/:id", updateStudent);
