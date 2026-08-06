@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 
 const studentRoutes = require("./routes/studentRoutes");
+const facultyRoutes = require("./routes/facultyRoutes");
+const departmentRoutes = require("./routes/departmentRoutes");
 
 const app = express();
 
@@ -16,5 +18,7 @@ app.get("/", (req, res) => {
 
 // Student Routes
 app.use("/api/students", studentRoutes);
+app.use("/api/faculty", facultyRoutes);
+app.use("/api/departments", departmentRoutes);
 
 module.exports = app;
