@@ -7,11 +7,16 @@ import Students from "./pages/Students/Students";
 import AddStudent from "./pages/Students/AddStudent";
 import EditStudent from "./pages/Students/EditStudent";
 import StudentDetails from "./pages/Students/StudentDetails";
+
 import Faculty from "./pages/faculty/Faculty";
 import AddFaculty from "./pages/faculty/AddFaculty";
 import EditFaculty from "./pages/faculty/EditFaculty";
 import FacultyDetails from "./pages/faculty/FacultyDetails";
 
+import Departments from "./pages/department/Departments";
+import AddDepartment from "./pages/department/AddDepartment";
+import EditDepartment from "./pages/department/EditDepartment";
+import DepartmentDetails from "./pages/department/DepartmentDetails";
 function App() {
   return (
     <MainLayout>
@@ -41,6 +46,17 @@ function App() {
         path="/faculty/details/:id"
         element={<FacultyDetails />}
       />
+
+      <Route path="/departments" element={<Departments />} />
+
+<Route path="/departments/add" element={<AddDepartment />} />
+
+<Route path="/departments/edit/:id" element={<EditDepartment />} />
+
+<Route
+  path="/departments/details/:id"
+  element={<DepartmentDetails />}
+/>
       </Routes>
     </MainLayout>
   );

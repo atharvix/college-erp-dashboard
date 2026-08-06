@@ -1,51 +1,83 @@
+import {
+  FaTachometerAlt,
+  FaUserGraduate,
+  FaChalkboardTeacher,
+  FaBuilding,
+  FaBook,
+  FaCalendarAlt,
+  FaUniversity,
+} from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-
 function Sidebar() {
+  const menuItems = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: <FaTachometerAlt />,
+  },
+  {
+    name: "Students",
+    path: "/students",
+    icon: <FaUserGraduate />,
+  },
+  {
+    name: "Faculty",
+    path: "/faculty",
+    icon: <FaChalkboardTeacher />,
+  },
+  {
+    name: "Departments",
+    path: "/departments",
+    icon: <FaBuilding />,
+  },
+  {
+    name: "Courses",
+    path: "/courses",
+    icon: <FaBook />,
+  },
+  {
+    name: "Timetable",
+    path: "/timetable",
+    icon: <FaCalendarAlt />,
+  },
+];
   return (
-    <div className="w-64 bg-gray-900 text-white min-h-screen p-5">
+    <div className="w-72 bg-gray-900 text-white min-h-screen p-6 shadow-xl">
+     <div className="flex items-center gap-3 mb-10 border-b border-gray-700 pb-6">
 
-      <h1 className="text-2xl font-bold mb-8">
-        College ERP
-      </h1>
+  <div className="bg-blue-600 p-3 rounded-xl">
+    <FaUniversity className="text-2xl text-white" />
+  </div>
 
-      <nav className="space-y-3">
+  <div>
+    <h1 className="text-2xl font-bold text-white">
+      College ERP
+    </h1>
 
-        <NavLink
-          to="/dashboard"
-          className="block p-3 rounded hover:bg-gray-700"
-        >
-          Dashboard
-        </NavLink>
+    <p className="text-gray-400 text-sm">
+      Admin Dashboard
+    </p>
+  </div>
 
-        <NavLink
-          to="/students"
-          className="block p-3 rounded hover:bg-gray-700"
-        >
-          Students
-        </NavLink>
-
-        <NavLink
-          to="/faculty"
-          className="block p-3 rounded hover:bg-gray-700"
-        >
-          Faculty
-        </NavLink>
-
-        <NavLink
-          to="/courses"
-          className="block p-3 rounded hover:bg-gray-700"
-        >
-          Courses
-        </NavLink>
-
-        <NavLink
-          to="/timetable"
-          className="block p-3 rounded hover:bg-gray-700"
-        >
-          Timetable
-        </NavLink>
-
-      </nav>
+</div>
+      <nav className="space-y-2">
+  {menuItems.map((item) => (
+    <NavLink
+      key={item.path}
+      to={item.path}
+      className={({ isActive }) =>
+        `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+          isActive
+            ? "bg-blue-600 text-white"
+            : "text-gray-300 hover:bg-gray-800 hover:text-white"
+        }`
+      }
+    >
+      <span className="text-xl">{item.icon}</span>
+      <span>{item.name}</span>
+    </NavLink>
+  ))}
+</nav>
 
     </div>
   );
