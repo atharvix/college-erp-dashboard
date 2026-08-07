@@ -1,46 +1,35 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-
 import MainLayout from "./layouts/MainLayout";
 
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Students from "./pages/Students/Students";
-import AddStudent from "./pages/Students/AddStudent";
-import EditStudent from "./pages/Students/EditStudent";
-import StudentDetails from "./pages/Students/StudentDetails";
-import Faculty from "./pages/faculty/Faculty";
-import AddFaculty from "./pages/faculty/AddFaculty";
-import EditFaculty from "./pages/faculty/EditFaculty";
-import FacultyDetails from "./pages/faculty/FacultyDetails";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import StudentsListPage from "./pages/students/StudentsListPage";
+import StudentAddPage from "./pages/students/StudentAddPage";
+import StudentDetailsPage from "./pages/students/StudentDetailsPage";
+import FacultyListPage from "./pages/faculty/FacultyListPage";
+import FacultyAddPage from "./pages/faculty/FacultyAddPage";
+import FacultyDetailsPage from "./pages/faculty/FacultyDetailsPage";
 
 function App() {
   return (
     <MainLayout>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Student Routes */}
+        <Route path="/students" element={<StudentsListPage />} />
+        <Route path="/students/add" element={<StudentAddPage />} />
+        <Route path="/students/edit/:id" element={<StudentAddPage />} />
+        <Route path="/students/details/:id" element={<StudentDetailsPage />} />
 
-        <Route path="/students" element={<Students />} />
+        {/* Faculty Routes */}
+        <Route path="/faculty" element={<FacultyListPage />} />
+        <Route path="/faculty/add" element={<FacultyAddPage />} />
+        <Route path="/faculty/edit/:id" element={<FacultyAddPage />} />
+        <Route path="/faculty/details/:id" element={<FacultyDetailsPage />} />
 
-        <Route path="/students/add" element={<AddStudent />} />
-
-        <Route path="/students/edit/:id" element={<EditStudent />} />
-
-        <Route
-          path="/students/details/:id"
-          element={<StudentDetails />}
-        />
-              {/* Faculty Routes */}
-      <Route path="/faculty" element={<Faculty />} />
-
-      <Route path="/faculty/add" element={<AddFaculty />} />
-
-      <Route path="/faculty/edit/:id" element={<EditFaculty />} />
-
-      <Route
-        path="/faculty/details/:id"
-        element={<FacultyDetails />}
-      />
+        {/* Fallback Catch-all Route */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </MainLayout>
   );

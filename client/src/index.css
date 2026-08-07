@@ -1,1 +1,124 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f1f5f9;
+    --bg-elevated: #ffffff;
+    --bg-subtle: #f8fafc;
+    
+    --border-subtle: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --border-accent: rgba(99, 102, 241, 0.3);
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-inverse: #f8fafc;
+    
+    --accent-primary: #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-subtle: rgba(79, 70, 229, 0.08);
+    --accent-glow: rgba(79, 70, 229, 0.25);
+    
+    --status-success: #10b981;
+    --status-success-bg: rgba(16, 185, 129, 0.1);
+    --status-warning: #f59e0b;
+    --status-warning-bg: rgba(245, 158, 11, 0.1);
+    --status-danger: #f43f5e;
+    --status-danger-bg: rgba(244, 63, 94, 0.1);
+    --status-info: #06b6d4;
+    --status-info-bg: rgba(6, 182, 212, 0.1);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+
+  .dark {
+    --bg-base: #090d16;
+    --bg-surface: #0f172a;
+    --bg-surface-hover: #1e293b;
+    --bg-elevated: #1e293b;
+    --bg-subtle: #131c2e;
+    
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --border-accent: rgba(99, 102, 241, 0.4);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --text-inverse: #0f172a;
+    
+    --accent-primary: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-subtle: rgba(99, 102, 241, 0.15);
+    --accent-glow: rgba(99, 102, 241, 0.35);
+
+    --status-success: #34d399;
+    --status-success-bg: rgba(52, 211, 153, 0.15);
+    --status-warning: #fbbf24;
+    --status-warning-bg: rgba(251, 191, 36, 0.15);
+    --status-danger: #fb7185;
+    --status-danger-bg: rgba(251, 113, 133, 0.15);
+    --status-info: #22d3ee;
+    --status-info-bg: rgba(34, 211, 238, 0.15);
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Tabular Numerals for Analytics & Tables */
+.font-numeric {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-subtle) 100%);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 10px 30px -10px var(--accent-glow);
+}

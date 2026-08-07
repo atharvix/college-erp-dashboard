@@ -1,14 +1,21 @@
-const dotenv = require("dotenv");
-const app = require("./app");
-const connectDB = require("./config/database");
-
-dotenv.config();
+const app = require('./app');
+const connectDB = require('./config/database');
+const env = require('./src/config/env');
 
 // Connect Database
 connectDB();
 
-const PORT = process.env.PORT || 5000;
+const PORT = env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`🚀 NexusERP Enterprise Server running on port ${PORT} [${env.NODE_ENV}]`);
+  console.log(`📑 OpenAPI Swagger Docs live at http://localhost:${PORT}/docs`);
+});
+
+// Handle unhandled promise rejections gracefully
+process.on('unhandledRejection', (err) => {
+  console.error('💥 UNHANDLED REJECTION! Shutting down server gracefully...', err);
+  server.close(() => {
+    process.exit(1);
+  });
 });
