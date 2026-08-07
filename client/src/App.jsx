@@ -9,6 +9,11 @@ import FacultyListPage from "./pages/faculty/FacultyListPage";
 import FacultyAddPage from "./pages/faculty/FacultyAddPage";
 import FacultyDetailsPage from "./pages/faculty/FacultyDetailsPage";
 
+import Departments from "./pages/department/Departments";
+import AddDepartment from "./pages/department/AddDepartment";
+import EditDepartment from "./pages/department/EditDepartment";
+import DepartmentDetails from "./pages/department/DepartmentDetails";
+
 function App() {
   return (
     <MainLayout>
@@ -27,6 +32,12 @@ function App() {
         <Route path="/faculty/add" element={<FacultyAddPage />} />
         <Route path="/faculty/edit/:id" element={<FacultyAddPage />} />
         <Route path="/faculty/details/:id" element={<FacultyDetailsPage />} />
+
+        {/* Department Routes */}
+        <Route path="/departments" element={<Departments />} />
+        <Route path="/departments/add" element={<AddDepartment />} />
+        <Route path="/departments/edit/:id" element={<EditDepartment />} />
+        <Route path="/departments/details/:id" element={<DepartmentDetails />} />
 
         {/* Fallback Catch-all Route */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
