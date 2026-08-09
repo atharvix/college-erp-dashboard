@@ -8,46 +8,55 @@ import {
 const activities = [
   {
     id: 1,
-    icon: <FaUserGraduate className="text-blue-600" />,
+    icon: <FaUserGraduate className="text-primary-600" />,
     text: "Rahul Sharma was added as a Student",
+    time: "2 hours ago",
   },
   {
     id: 2,
-    icon: <FaChalkboardTeacher className="text-green-600" />,
+    icon: <FaChalkboardTeacher className="text-emerald-600" />,
     text: "Dr. Priya Mehta updated Faculty Profile",
+    time: "5 hours ago",
   },
   {
     id: 3,
     icon: <FaBuilding className="text-purple-600" />,
     text: "Computer Science Department created",
+    time: "Yesterday",
   },
   {
     id: 4,
     icon: <FaBook className="text-orange-600" />,
     text: 'New Course "Data Structures" added',
+    time: "2 days ago",
   },
 ];
 
 function RecentActivity() {
   return (
-    <div className="bg-white rounded-xl shadow p-6 mt-10">
-      <h2 className="text-2xl font-semibold mb-6">
+    <div className="card p-6 mt-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-5">
         Recent Activities
       </h2>
 
-      <div className="space-y-5">
+      <div className="space-y-4">
         {activities.map((activity) => (
           <div
             key={activity.id}
-            className="flex items-center gap-4 border-b pb-4 last:border-none"
+            className="flex items-center gap-4 border-b border-gray-100 pb-4 last:border-none last:pb-0 dark:border-gray-700"
           >
-            <div className="text-2xl">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-lg dark:bg-gray-800">
               {activity.icon}
             </div>
 
-            <p className="text-gray-700">
-              {activity.text}
-            </p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm text-gray-700 dark:text-gray-200">
+                {activity.text}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {activity.time}
+              </p>
+            </div>
           </div>
         ))}
       </div>

@@ -1,13 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import EmptyState from "../ui/EmptyState";
 
 function DepartmentTable({ departments }) {
   const navigate = useNavigate();
 
+  if (departments.length === 0) {
+    return (
+      <div className="table-card">
+        <EmptyState
+          message="No departments found"
+          hint="Try adjusting your search or filters."
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white rounded-xl shadow overflow-x-auto">
-      <table className="w-full">
-        <thead className="bg-gray-100">
+    <div className="table-card">
+      <table className="table">
+        <thead>
           <tr>
             <th className="p-4 text-left">Department</th>
             <th className="p-4 text-left">HOD</th>
@@ -20,11 +32,10 @@ function DepartmentTable({ departments }) {
 
         <tbody>
           {departments.map((department) => (
-            <tr
-              key={department.id}
-              className="border-t hover:bg-gray-50"
-            >
-              <td className="p-4">{department.name}</td>
+            <tr key={department.id}>
+              <td className="p-4 font-medium text-gray-900 dark:text-white">
+                {department.name}
+              </td>
 
               <td className="p-4">{department.hod}</td>
 
@@ -34,11 +45,11 @@ function DepartmentTable({ departments }) {
 
               <td className="p-4">
                 <span
-                  className={`px-3 py-1 rounded-full text-sm ${
+                  className={
                     department.status === "Active"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
+                      ? "badge-active"
+                      : "badge-inactive"
+                  }
                 >
                   {department.status}
                 </span>
@@ -50,7 +61,8 @@ function DepartmentTable({ departments }) {
                     onClick={() =>
                       navigate(`/departments/details/${department.id}`)
                     }
-                    className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"
+                    className="btn-view"
+                    aria-label={`View ${department.name}`}
                   >
                     <FaEye />
                   </button>
@@ -59,7 +71,8 @@ function DepartmentTable({ departments }) {
                     onClick={() =>
                       navigate(`/departments/edit/${department.id}`)
                     }
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full"
+                    className="btn-edit"
+                    aria-label={`Edit ${department.name}`}
                   >
                     <FaEdit />
                   </button>
@@ -68,7 +81,8 @@ function DepartmentTable({ departments }) {
                     onClick={() =>
                       alert(`Delete ${department.name}`)
                     }
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"
+                    className="btn-delete"
+                    aria-label={`Delete ${department.name}`}
                   >
                     <FaTrash />
                   </button>

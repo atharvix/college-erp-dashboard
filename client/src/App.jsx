@@ -2,11 +2,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Students from "./pages/Students/Students";
-import AddStudent from "./pages/Students/AddStudent";
-import EditStudent from "./pages/Students/EditStudent";
-import StudentDetails from "./pages/Students/StudentDetails";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Students from "./pages/students/Students";
+import AddStudent from "./pages/students/AddStudent";
+import EditStudent from "./pages/students/EditStudent";
+import StudentDetails from "./pages/students/StudentDetails";
 
 import Faculty from "./pages/faculty/Faculty";
 import AddFaculty from "./pages/faculty/AddFaculty";
@@ -17,6 +17,13 @@ import Departments from "./pages/department/Departments";
 import AddDepartment from "./pages/department/AddDepartment";
 import EditDepartment from "./pages/department/EditDepartment";
 import DepartmentDetails from "./pages/department/DepartmentDetails";
+
+import Courses from "./pages/courses/Courses";
+import AddCourse from "./pages/courses/AddCourse";
+import EditCourse from "./pages/courses/EditCourse";
+import CourseDetails from "./pages/courses/CourseDetails";
+
+import Timetable from "./pages/timetable/Timetable";
 function App() {
   return (
     <MainLayout>
@@ -57,6 +64,16 @@ function App() {
   path="/departments/details/:id"
   element={<DepartmentDetails />}
 />
+
+<Route path="/courses" element={<Courses />} />
+
+<Route path="/courses/add" element={<AddCourse />} />
+
+<Route path="/courses/edit/:id" element={<EditCourse />} />
+
+<Route path="/courses/details/:id" element={<CourseDetails />} />
+
+<Route path="/timetable" element={<Timetable />} />
       </Routes>
     </MainLayout>
   );

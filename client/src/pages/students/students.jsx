@@ -12,7 +12,7 @@ function Students() {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [studentList, setStudentList] = useState(students);
+  const [studentList] = useState(students);
 
   const [courseFilter, setCourseFilter] = useState("");
   const [batchFilter, setBatchFilter] = useState("");
@@ -47,16 +47,19 @@ function Students() {
   });
 
   return (
-    <div className="p-6">
+    <div className="page">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Student Management
-        </h1>
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">Student Management</h1>
+          <p className="page-subtitle">
+            View, filter and manage student records.
+          </p>
+        </div>
 
         <button
           onClick={() => navigate("/students/add")}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          className="btn-primary"
         >
           <FaPlus />
           Add Student

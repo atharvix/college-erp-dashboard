@@ -1,14 +1,40 @@
-function AddFaculty() {
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">
-        Add Faculty
-      </h1>
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaUserGraduate } from "react-icons/fa";
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <p className="text-gray-500">
-          Faculty form will be added here.
-        </p>
+function AddFaculty() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="page">
+      <button
+        onClick={() => navigate("/faculty")}
+        className="btn-secondary mb-6 w-fit"
+      >
+        <FaArrowLeft />
+        Back to Faculty
+      </button>
+
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">Add Faculty</h1>
+          <p className="page-subtitle">
+            Fill in the details to add a new faculty member.
+          </p>
+        </div>
+      </div>
+
+      <div className="card p-6">
+        <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500">
+            <FaUserGraduate className="h-6 w-6" />
+          </div>
+          <h3 className="mt-4 text-sm font-semibold text-gray-900 dark:text-white">
+            Faculty form coming soon
+          </h3>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            The faculty registration form will be available here.
+          </p>
+        </div>
       </div>
     </div>
   );

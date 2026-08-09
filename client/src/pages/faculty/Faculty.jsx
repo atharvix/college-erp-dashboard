@@ -9,78 +9,81 @@ import FacultyStats from "../../components/faculty/FacultyStats";
 import FacultyTable from "../../components/faculty/FacultyTable";
 
 function Faculty() {
-     const navigate = useNavigate();
-            const [searchTerm, setSearchTerm] = useState("");
-        const [facultyList, setFacultyList] = useState(facultyData);
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [facultyList] = useState(facultyData);
 
-        const [departmentFilter, setDepartmentFilter] = useState("");
-        const [designationFilter, setDesignationFilter] = useState("");
-        const [statusFilter, setStatusFilter] = useState("");
-        const filteredFaculty = facultyList.filter((teacher) => {
- const matchesSearch =
-  teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  teacher.employeeId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  teacher.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  teacher.department.toLowerCase().includes(searchTerm.toLowerCase());
+  const [departmentFilter, setDepartmentFilter] = useState("");
+  const [designationFilter, setDesignationFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const filteredFaculty = facultyList.filter((teacher) => {
+    const matchesSearch =
+      teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      teacher.employeeId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      teacher.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      teacher.department.toLowerCase().includes(searchTerm.toLowerCase());
 
-  const matchesDepartment =
-    departmentFilter === "" ||
-    teacher.department === departmentFilter;
+    const matchesDepartment =
+      departmentFilter === "" ||
+      teacher.department === departmentFilter;
 
-  const matchesDesignation =
-    designationFilter === "" ||
-    teacher.designation === designationFilter;
+    const matchesDesignation =
+      designationFilter === "" ||
+      teacher.designation === designationFilter;
 
-  const matchesStatus =
-    statusFilter === "" ||
-    teacher.status === statusFilter;
+    const matchesStatus =
+      statusFilter === "" ||
+      teacher.status === statusFilter;
+
+    return (
+      matchesSearch &&
+      matchesDepartment &&
+      matchesDesignation &&
+      matchesStatus
+    );
+  });
 
   return (
-    matchesSearch &&
-    matchesDepartment &&
-    matchesDesignation &&
-    matchesStatus
-  );
-});
-  
-  return (
-  <div className="p-6">
+    <div className="page">
+      {/* Header */}
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">Faculty Management</h1>
+          <p className="page-subtitle">
+            View, filter and manage faculty members.
+          </p>
+        </div>
 
-    {/* Header */}
-    <div className="flex items-center justify-between mb-6">
-      <h1 className="text-3xl font-bold text-gray-800">
-        Faculty Management
-      </h1>
+        <button
+          onClick={() => navigate("/faculty/add")}
+          className="btn-primary"
+        >
+          <FaPlus />
+          Add Faculty
+        </button>
+      </div>
 
-      <button
-  onClick={() => navigate("/faculty/add")}
-  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
->
-  <FaPlus />
-  Add Faculty
-</button>
+      {/* Statistics */}
+      <FacultyStats faculty={filteredFaculty} />
+
+      {/* Search */}
+      <FacultySearch
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
+      <FacultyFilters
+        departmentFilter={departmentFilter}
+        setDepartmentFilter={setDepartmentFilter}
+        designationFilter={designationFilter}
+        setDesignationFilter={setDesignationFilter}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+      />
+
+      <FacultyTable faculty={filteredFaculty} />
     </div>
-
-    {/* Statistics */}
-    <FacultyStats faculty={filteredFaculty} />
-
-    {/* Search */}
-    <FacultySearch
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-    />
-    
-    <FacultyFilters
-  departmentFilter={departmentFilter}
-  setDepartmentFilter={setDepartmentFilter}
-  designationFilter={designationFilter}
-  setDesignationFilter={setDesignationFilter}
-  statusFilter={statusFilter}
-  setStatusFilter={setStatusFilter}
-/>
-  <FacultyTable faculty={filteredFaculty} />
-  </div>
-);
+  );
 }
 
 export default Faculty;

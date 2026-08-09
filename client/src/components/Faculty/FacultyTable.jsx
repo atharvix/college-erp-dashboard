@@ -1,66 +1,78 @@
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import EmptyState from "../ui/EmptyState";
 
 function FacultyTable({ faculty }) {
   const navigate = useNavigate();
 
+  if (faculty.length === 0) {
+    return (
+      <div className="table-card">
+        <EmptyState
+          message="No faculty members found"
+          hint="Try adjusting your search or filters."
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white rounded-lg shadow overflow-x-auto">
-      <table className="w-full border-collapse">
-        <thead className="bg-gray-100">
+    <div className="table-card">
+      <table className="table">
+        <thead>
           <tr>
-            <th className="p-3 text-left">Photo</th>
-            <th className="p-3 text-left">Employee ID</th>
-            <th className="p-3 text-left">Name</th>
-            <th className="p-3 text-left">Department</th>
-            <th className="p-3 text-left">Designation</th>
-            <th className="p-3 text-left">Email</th>
-            <th className="p-3 text-left">Phone</th>
-            <th className="p-3 text-left">Status</th>
-            <th className="p-3 text-center">Actions</th>
+            <th className="p-4 text-left">Photo</th>
+            <th className="p-4 text-left">Employee ID</th>
+            <th className="p-4 text-left">Name</th>
+            <th className="p-4 text-left">Department</th>
+            <th className="p-4 text-left">Designation</th>
+            <th className="p-4 text-left">Email</th>
+            <th className="p-4 text-left">Phone</th>
+            <th className="p-4 text-left">Status</th>
+            <th className="p-4 text-center">Actions</th>
           </tr>
         </thead>
 
         <tbody>
           {faculty.map((teacher) => (
-            <tr
-              key={teacher.id}
-              className="border-t hover:bg-blue-50 transition-colors duration-200"
-            >
-              <td className="p-3">
+            <tr key={teacher.id}>
+              <td className="p-4">
                 <img
                   src={teacher.image}
                   alt={teacher.name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="h-12 w-12 rounded-full object-cover"
                 />
               </td>
 
-              <td className="p-3">{teacher.employeeId}</td>
-              <td className="p-3">{teacher.name}</td>
-              <td className="p-3">{teacher.department}</td>
-              <td className="p-3">{teacher.designation}</td>
-              <td className="p-3">{teacher.email}</td>
-              <td className="p-3">{teacher.phone}</td>
+              <td className="p-4">{teacher.employeeId}</td>
+              <td className="p-4 font-medium text-gray-900 dark:text-white">
+                {teacher.name}
+              </td>
+              <td className="p-4">{teacher.department}</td>
+              <td className="p-4">{teacher.designation}</td>
+              <td className="p-4">{teacher.email}</td>
+              <td className="p-4">{teacher.phone}</td>
 
-              <td className="p-3">
+              <td className="p-4">
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  className={
                     teacher.status === "Active"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
+                      ? "badge-active"
+                      : "badge-inactive"
+                  }
                 >
                   {teacher.status}
                 </span>
               </td>
 
-              <td className="p-3">
+              <td className="p-4">
                 <div className="flex justify-center gap-2">
                   <button
                     onClick={() =>
                       navigate(`/faculty/details/${teacher.id}`)
                     }
-                    className="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"
+                    className="btn-view"
+                    aria-label={`View ${teacher.name}`}
                   >
                     <FaEye />
                   </button>
@@ -69,14 +81,16 @@ function FacultyTable({ faculty }) {
                     onClick={() =>
                       navigate(`/faculty/edit/${teacher.id}`)
                     }
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full"
+                    className="btn-edit"
+                    aria-label={`Edit ${teacher.name}`}
                   >
                     <FaEdit />
                   </button>
 
                   <button
                     onClick={() => alert(`Delete ${teacher.name}`)}
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"
+                    className="btn-delete"
+                    aria-label={`Delete ${teacher.name}`}
                   >
                     <FaTrash />
                   </button>

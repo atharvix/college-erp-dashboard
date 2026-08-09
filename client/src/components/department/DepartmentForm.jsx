@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function DepartmentForm() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     code: "",
@@ -31,45 +31,45 @@ function DepartmentForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-xl shadow p-6"
+      className="card p-6"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 
         {/* Department Name */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Department Name
           </label>
-<input
-  type="text"
-  name="name"
-  value={formData.name}
-  onChange={handleChange}
-  placeholder="Computer Science"
-  className="w-full border rounded-lg p-3"
-  required
-/>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Computer Science"
+            className="input"
+            required
+          />
         </div>
 
         {/* Department Code */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Department Code
           </label>
 
           <input
-  type="text"
-  name="code"
-  value={formData.code}
-  onChange={handleChange}
-  className="w-full border rounded-lg p-3"
-  required
-/>
+            type="text"
+            name="code"
+            value={formData.code}
+            onChange={handleChange}
+            className="input"
+            required
+          />
         </div>
 
         {/* HOD */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Head of Department
           </label>
 
@@ -79,46 +79,46 @@ function DepartmentForm() {
             value={formData.hod}
             onChange={handleChange}
             placeholder="Dr. Rajesh Sharma"
-            className="w-full border rounded-lg p-3"
+            className="input"
             required
           />
         </div>
 
         {/* Faculty */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Faculty Count
           </label>
 
           <input
-  type="number"
-  name="faculty"
-  value={formData.faculty}
-  onChange={handleChange}
-  className="w-full border rounded-lg p-3"
-  required
-/>
+            type="number"
+            name="faculty"
+            value={formData.faculty}
+            onChange={handleChange}
+            className="input"
+            required
+          />
         </div>
 
         {/* Students */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Student Count
           </label>
 
           <input
-  type="number"
-  name="students"
-  value={formData.students}
-  onChange={handleChange}
-  className="w-full border rounded-lg p-3"
-  required
-/>
+            type="number"
+            name="students"
+            value={formData.students}
+            onChange={handleChange}
+            className="input"
+            required
+          />
         </div>
 
         {/* Status */}
         <div>
-          <label className="block mb-2 font-medium">
+          <label className="label">
             Status
           </label>
 
@@ -126,7 +126,7 @@ function DepartmentForm() {
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3"
+            className="select"
           >
             <option>Active</option>
             <option>Inactive</option>
@@ -137,7 +137,7 @@ function DepartmentForm() {
 
       {/* Description */}
       <div className="mt-6">
-        <label className="block mb-2 font-medium">
+        <label className="label">
           Description
         </label>
 
@@ -147,7 +147,7 @@ function DepartmentForm() {
           value={formData.description}
           onChange={handleChange}
           placeholder="Write department description..."
-          className="w-full border rounded-lg p-3"
+          className="input"
         />
       </div>
 
@@ -155,15 +155,15 @@ function DepartmentForm() {
       <div className="flex justify-end gap-4 mt-8">
 
         <button
-  type="button"
-  onClick={() => navigate("/departments")}
-  className="px-6 py-3 border rounded-lg hover:bg-gray-100"
->
-  Cancel
-</button>
+          type="button"
+          onClick={() => navigate("/departments")}
+          className="btn-secondary"
+        >
+          Cancel
+        </button>
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+          className="btn-primary"
         >
           Save Department
         </button>

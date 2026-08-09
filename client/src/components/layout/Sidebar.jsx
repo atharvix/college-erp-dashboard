@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FaTachometerAlt,
   FaUserGraduate,
@@ -6,80 +7,147 @@ import {
   FaBook,
   FaCalendarAlt,
   FaUniversity,
+  FaTimes,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-function Sidebar() {
-  const menuItems = [
-  {
-    name: "Dashboard",
-    path: "/dashboard",
-    icon: <FaTachometerAlt />,
-  },
-  {
-    name: "Students",
-    path: "/students",
-    icon: <FaUserGraduate />,
-  },
-  {
-    name: "Faculty",
-    path: "/faculty",
-    icon: <FaChalkboardTeacher />,
-  },
-  {
-    name: "Departments",
-    path: "/departments",
-    icon: <FaBuilding />,
-  },
-  {
-    name: "Courses",
-    path: "/courses",
-    icon: <FaBook />,
-  },
-  {
-    name: "Timetable",
-    path: "/timetable",
-    icon: <FaCalendarAlt />,
-  },
+
+const menuItems = [
+  { name: "Dashboard", path: "/dashboard", icon: <FaTachometerAlt /> },
+  { name: "Students", path: "/students", icon: <FaUserGraduate /> },
+  { name: "Faculty", path: "/faculty", icon: <FaChalkboardTeacher /> },
+  { name: "Departments", path: "/departments", icon: <FaBuilding /> },
+  { name: "Courses", path: "/courses", icon: <FaBook /> },
+  { name: "Timetable", path: "/timetable", icon: <FaCalendarAlt /> },
 ];
+
+const iconButtonClass =
+  "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-gray-400 transition-colors duration-200 hover:bg-gray-800 hover:text-white";
+
+function Sidebar({ open, onClose }) {
+  const [collapsed, setCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem("sidebar-collapsed") === "true";
+    } catch {
+      return false;
+    }
+  });
+
+  const persistCollapsed = (value) => {
+    setCollapsed(value);
+    try {
+      localStorage.setItem("sidebar-collapsed", value ? "true" : "false");
+    } catch {
+      /* storage unavailable */
+    }
+  };
+
+  const compact = collapsed && !open;
+
   return (
-    <div className="w-72 bg-gray-900 text-white min-h-screen p-6 shadow-xl">
-     <div className="flex items-center gap-3 mb-10 border-b border-gray-700 pb-6">
-
-  <div className="bg-blue-600 p-3 rounded-xl">
-    <FaUniversity className="text-2xl text-white" />
-  </div>
-
-  <div>
-    <h1 className="text-2xl font-bold text-white">
-      College ERP
-    </h1>
-
-    <p className="text-gray-400 text-sm">
-      Admin Dashboard
-    </p>
-  </div>
-
-</div>
-      <nav className="space-y-2">
-  {menuItems.map((item) => (
-    <NavLink
-      key={item.path}
-      to={item.path}
-      className={({ isActive }) =>
-        `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-          isActive
-            ? "bg-blue-600 text-white"
-            : "text-gray-300 hover:bg-gray-800 hover:text-white"
-        }`
-      }
+    <aside
+      className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-gray-900 shadow-xl transition-all duration-300 lg:static lg:translate-x-0 ${
+        compact ? "w-20" : "w-72"
+      } ${open ? "translate-x-0" : "-translate-x-full"}`}
     >
-      <span className="text-xl">{item.icon}</span>
-      <span>{item.name}</span>
-    </NavLink>
-  ))}
-</nav>
+      {/* Brand */}
+      <div
+        className={`flex items-center border-b border-gray-800 py-5 ${
+          compact ? "justify-center px-2" : "justify-between px-5"
+        }`}
+      >
+        <div
+          className={`flex items-center gap-3 ${
+            compact ? "flex-col" : ""
+          }`}
+        >
+          <div className="rounded-xl bg-primary-600 p-2.5 shadow-card">
+            <FaUniversity className="text-xl text-white" />
+          </div>
 
-    </div>
+          {!compact && (
+            <div className="leading-tight">
+              <h1 className="text-lg font-bold text-white">College ERP</h1>
+              <p className="text-xs text-gray-400">Admin Dashboard</p>
+            </div>
+          )}
+        </div>
+
+        {!compact && (
+          <button
+            onClick={onClose}
+            className={`${iconButtonClass} lg:hidden`}
+            aria-label="Close sidebar"
+          >
+            <FaTimes />
+          </button>
+        )}
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4">
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            onClick={onClose}
+            title={compact ? item.name : undefined}
+            className={({ isActive }) =>
+              `group relative flex items-center rounded-lg text-sm font-medium transition-all duration-200 ${
+                compact ? "justify-center py-3" : "gap-3 px-3.5 py-2.5"
+              } ${
+                isActive
+                  ? "bg-primary-600 text-white shadow-card"
+                  : "text-gray-400 hover:bg-gray-800 hover:text-white"
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                {/* Active route indicator */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-0 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-white transition-opacity duration-200 ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                <span className="text-lg">{item.icon}</span>
+
+                {!compact && <span className="flex-1">{item.name}</span>}
+              </>
+            )}
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between border-t border-gray-800 px-3 py-3">
+        {!compact ? (
+          <>
+            <p className="px-2 text-xs text-gray-500">© 2026 College ERP</p>
+            <button
+              onClick={() => persistCollapsed(true)}
+              className={`${iconButtonClass} hidden lg:flex`}
+              aria-label="Collapse sidebar"
+              title="Collapse sidebar"
+            >
+              <FaChevronLeft />
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => persistCollapsed(false)}
+            className={`${iconButtonClass} w-full`}
+            aria-label="Expand sidebar"
+            title="Expand sidebar"
+          >
+            <FaChevronRight />
+          </button>
+        )}
+      </div>
+    </aside>
   );
 }
 

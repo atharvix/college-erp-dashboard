@@ -2,8 +2,8 @@ import { FaSearch } from "react-icons/fa";
 
 function DepartmentSearch({ searchTerm, setSearchTerm }) {
   return (
-    <div className="bg-white p-4 rounded-lg shadow mb-6">
-      <div className="relative">
+    <div className="card p-4 mb-6">
+      <div className="search-box">
         <FaSearch className="absolute left-3 top-3 text-gray-400" />
 
         <input
@@ -11,7 +11,7 @@ function DepartmentSearch({ searchTerm, setSearchTerm }) {
           placeholder="Search by Department or HOD..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full border rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="search-input"
         />
       </div>
     </div>

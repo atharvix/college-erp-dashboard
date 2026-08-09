@@ -25,8 +25,8 @@ const events = [
 
 function UpcomingEvents() {
   return (
-    <div className="bg-white rounded-xl shadow p-6">
-      <h2 className="text-xl font-semibold mb-5">
+    <div className="card p-6">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-5">
         Upcoming Events
       </h2>
 
@@ -34,20 +34,20 @@ function UpcomingEvents() {
         {events.map((event) => (
           <div
             key={event.id}
-            className="flex items-center justify-between border-b pb-3 last:border-none"
+            className="flex items-center gap-4 border-b border-gray-100 pb-3 last:border-none last:pb-0 dark:border-gray-700"
           >
-            <div className="flex items-center gap-3">
-              <FaCalendarAlt className="text-blue-600 text-xl" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-500/10">
+              <FaCalendarAlt />
+            </div>
 
-              <div>
-                <p className="font-medium">
-                  {event.title}
-                </p>
+            <div>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                {event.title}
+              </p>
 
-                <p className="text-sm text-gray-500">
-                  {event.date}
-                </p>
-              </div>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {event.date}
+              </p>
             </div>
           </div>
         ))}

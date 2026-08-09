@@ -1,98 +1,122 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import departments from "../../data/departmentData";
+import EmptyState from "../../components/ui/EmptyState";
 
 function DepartmentDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const department = departments.find(
     (dept) => dept.id === Number(id)
   );
-  console.log(department);
 
   if (!department) {
     return (
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-red-500">
-          Department Not Found
-        </h1>
+      <div className="page">
+        <div className="table-card">
+          <EmptyState
+            message="Department Not Found"
+            hint="The department you're looking for doesn't exist."
+          />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6">
+    <div className="page">
+      <button
+        onClick={() => navigate("/departments")}
+        className="btn-secondary mb-6 w-fit"
+      >
+        <FaArrowLeft />
+        Back to Departments
+      </button>
 
-      <h1 className="text-3xl font-bold mb-6">
-        Department Details
-      </h1>
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">Department Details</h1>
+          <p className="page-subtitle">
+            Complete profile information for this department.
+          </p>
+        </div>
+      </div>
 
-      <div className="bg-white rounded-xl shadow p-8">
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+      <div className="card p-6 sm:p-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <h3 className="text-gray-500">Department Name</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Department Name
+            </h3>
+            <p className="mt-1 font-semibold text-gray-900 dark:text-white">
               {department.name}
             </p>
           </div>
 
           <div>
-            <h3 className="text-gray-500">Department Code</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Department Code
+            </h3>
+            <p className="mt-1 font-semibold text-gray-900 dark:text-white">
               {department.code}
             </p>
           </div>
 
           <div>
-            <h3 className="text-gray-500">Head of Department</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Head of Department
+            </h3>
+            <p className="mt-1 font-semibold text-gray-900 dark:text-white">
               {department.hod}
             </p>
           </div>
 
           <div>
-            <h3 className="text-gray-500">Faculty Count</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Faculty Count
+            </h3>
+            <p className="mt-1 font-semibold text-gray-900 dark:text-white">
               {department.faculty}
             </p>
           </div>
 
           <div>
-            <h3 className="text-gray-500">Student Count</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Student Count
+            </h3>
+            <p className="mt-1 font-semibold text-gray-900 dark:text-white">
               {department.students}
             </p>
           </div>
 
           <div>
-            <h3 className="text-gray-500">Status</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Status
+            </h3>
 
             <span
-              className={`px-3 py-1 rounded-full ${
+              className={
                 department.status === "Active"
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
-              }`}
+                  ? "badge-active"
+                  : "badge-inactive"
+              }
             >
               {department.status}
             </span>
           </div>
-
         </div>
 
         <div className="mt-8">
-          <h3 className="text-gray-500 mb-2">
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
             Description
           </h3>
 
-          <p>
+          <p className="text-gray-700 dark:text-gray-200">
             {department.description}
           </p>
         </div>
-
       </div>
-
     </div>
   );
 }

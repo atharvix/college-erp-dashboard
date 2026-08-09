@@ -1,3 +1,5 @@
+import StatCard from "../ui/StatCard";
+
 function DepartmentStats({ departments }) {
   const totalDepartments = departments.length;
 
@@ -16,34 +18,26 @@ function DepartmentStats({ departments }) {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="stat-grid">
+      <StatCard label="Departments" value={totalDepartments} />
 
-      <div className="bg-white rounded-xl shadow p-5">
-        <h3 className="text-gray-500">Departments</h3>
-        <p className="text-3xl font-bold">{totalDepartments}</p>
-      </div>
+      <StatCard
+        label="Active"
+        value={activeDepartments}
+        valueClass="text-emerald-600 dark:text-emerald-400"
+      />
 
-      <div className="bg-white rounded-xl shadow p-5">
-        <h3 className="text-gray-500">Active</h3>
-        <p className="text-3xl font-bold text-green-600">
-          {activeDepartments}
-        </p>
-      </div>
+      <StatCard
+        label="Faculty"
+        value={totalFaculty}
+        valueClass="text-primary-600 dark:text-primary-400"
+      />
 
-      <div className="bg-white rounded-xl shadow p-5">
-        <h3 className="text-gray-500">Faculty</h3>
-        <p className="text-3xl font-bold text-blue-600">
-          {totalFaculty}
-        </p>
-      </div>
-
-      <div className="bg-white rounded-xl shadow p-5">
-        <h3 className="text-gray-500">Students</h3>
-        <p className="text-3xl font-bold text-purple-600">
-          {totalStudents}
-        </p>
-      </div>
-
+      <StatCard
+        label="Students"
+        value={totalStudents}
+        valueClass="text-purple-600 dark:text-purple-400"
+      />
     </div>
   );
 }
